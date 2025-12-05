@@ -36,8 +36,19 @@ prometheus.scrape "mongodb" {
   forward_to = [ prometheus.remote_write.alloy_proxy.receiver ]
 }
 ```
-
+## Nginx enable Nginx Status > /etc/nginx/conf.d/nginx_status.conf
 ```bash
+server {
+    listen 80;
+    server_name galldeglttst17.prd.dsg-internal;
+
+    location /nginx_status {
+        stub_status;
+        allow 127.0.0.1;
+        allow 10.42.2.56;
+        deny all;
+    }
+}
 ```
 
 ```bash

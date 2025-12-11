@@ -50,11 +50,19 @@ server {
     }
 }
 ```
+## Squid Add to /etc/squid/squid.conf: and restart systemctl restart squid
 
 ```bash
+acl prometheus src 127.0.0.1
+http_access allow manager prometheus
+http_access deny manager
 ```
-
+## Kafka, for full metrics add to kafka-env.sh and restart kafka
 ```bash
+export JMX_PORT=9999
+export KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote \
+                       -Dcom.sun.management.jmxremote.authenticate=false \
+                       -Dcom.sun.management.jmxremote.ssl=false"
 ```
 
 ```bash
